@@ -9,7 +9,7 @@ import {
   MenuItem,
   InputBase
 } from '@mui/material'
-import { setMode } from '../../store/store'
+import { setLogout, setMode } from '../../store/store'
 
 import {
   DarkMode,
@@ -19,12 +19,14 @@ import {
   Logout
 } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const [isMobileToggle, setIsMobileToggle] = useState(false)
   const user = useSelector((state) => state.user)
-  const fullName = `Huan Zeng`
+  const fullName = `${user?.firstName} ${user?.lastName}`
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const isMobile = useMediaQuery('(min-width: 1000px)')
   const theme = useTheme()
 
@@ -34,6 +36,10 @@ const Navbar = () => {
 
   const handleMode = () => {
     dispatch(setMode())
+  }
+  const handleLogout = () => {
+    dispatch(setLogout())
+    navigate('/')
   }
   return (
     <Box
@@ -58,7 +64,16 @@ const Navbar = () => {
       {isMobile ? (
         <Box display="flex" justifyContent="flex-end" alignItems="center">
           <Box display="flex" justifyContent="space-between">
-            <DarkMode sx={{ marginLeft: '1rem' }} onClick={handleMode} />
+            <DarkMode
+              sx={{
+                marginLeft: '1rem',
+                '&:hover': {
+                  cursor: 'pointer',
+                  color: theme.palette.primary.dark
+                }
+              }}
+              onClick={handleMode}
+            />
             <Comment sx={{ marginLeft: '1rem' }} />
             <Notifications sx={{ marginLeft: '1rem' }} />
           </Box>
@@ -80,7 +95,12 @@ const Navbar = () => {
                   </Typography>
                 </MenuItem>
                 <MenuItem>
-                  <Typography sx={{ display: 'flex' }}>
+                  <Typography
+                    sx={{
+                      display: 'flex'
+                    }}
+                    onClick={handleLogout}
+                  >
                     <Logout sx={{ mr: '.5rem' }} /> Logout
                   </Typography>
                 </MenuItem>
@@ -114,9 +134,24 @@ const Navbar = () => {
             justifyContent="space-between"
             flexDirection="column"
           >
-            <DarkMode sx={{ mb: '1rem' }} onClick={handleMode} />
+            <DarkMode
+              sx={{ mb: '1rem', '&:hover': { cursor: 'pointer' } }}
+              onClick={handleMode}
+            />
             <Comment sx={{ mb: '1rem' }} />
             <Notifications sx={{ mb: '1rem' }} />
+            <Typography
+              sx={{
+                display: 'flex',
+                '&:hover': {
+                  backgroundColor: theme.palette.primary.dark,
+                  cursor: 'pointer'
+                }
+              }}
+              onClick={handleLogout}
+            >
+              <Logout sx={{ mr: '.5rem' }} /> Logout
+            </Typography>
           </Box>
         </Box>
       )}
