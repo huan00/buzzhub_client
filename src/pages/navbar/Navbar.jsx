@@ -55,7 +55,7 @@ const Navbar = () => {
           fontSize="clamp(1rem, 2rem, 2.25rem)"
           color="primary"
           sx={{ '&:hover': { color: primaryLight, cursor: 'pointer' } }}
-          onClick={() => setIsMobileToggle((isMobileToggle) => !isMobileToggle)}
+          onClick={() => navigate('/home')}
         >
           Buzzhub
         </Typography>

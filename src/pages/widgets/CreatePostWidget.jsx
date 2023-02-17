@@ -32,7 +32,7 @@ const CreatePostWidget = () => {
     const formData = new FormData()
 
     formData.append('userId', user.id)
-    formData.append('description', post.description)
+    formData.append('description', post)
     formData.append('image', postImage)
 
     const res = await fetch('http://localhost:8000/buzzhub/posts/create', {
@@ -58,6 +58,8 @@ const CreatePostWidget = () => {
       backgroundColor={theme.palette.neutral.light}
       borderRadius="5px"
       alignItems="center"
+      position="sticky"
+      top="0"
     >
       <Box
         display="flex"
@@ -86,7 +88,7 @@ const CreatePostWidget = () => {
           placeholder="What's on your mind?"
           name="description"
           value={post}
-          onChange={(e) => setPost({ [e.target.name]: e.target.value })}
+          onChange={(e) => setPost(e.target.value)}
           sx={{ width: '80%', ml: '1rem' }}
         />
       </Box>

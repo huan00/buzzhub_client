@@ -7,11 +7,36 @@ import {
   LinkedIn,
   Edit
 } from '@mui/icons-material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../store/store'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const UserWidget = () => {
+const UserWidget = ({ userId }) => {
   const user = useSelector((state) => state.user)
   const theme = useTheme()
+  const token = useSelector((state) => state.token)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const getUser = async () => {
+    const res = await fetch(`http://localhost:8000/buzzhub/user/${userId}`, {
+      method: 'GET',
+      headers: { Authorization: `Token ${token}` }
+    })
+
+    const data = await res.json()
+
+    dispatch(setUser(data))
+  }
+
+  useEffect(() => {
+    getUser()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!user) {
+    navigate('/')
+  }
 
   return (
     <Box
@@ -26,6 +51,8 @@ const UserWidget = () => {
         justifyContent="space-between"
         alignItems="center"
         p="0 0 1rem 0"
+        onClick={() => navigate(`/profile/${user.id}`)}
+        sx={{ '&:hover': { cursor: 'pointer' } }}
       >
         <Box
           borderRadius="50%"

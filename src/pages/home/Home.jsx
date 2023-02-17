@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Grid } from '@mui/material'
-import Navbar from '../navbar/Navbar'
+import React, { useEffect } from 'react'
+import { Grid } from '@mui/material'
+
 import UserWidget from '../widgets/UserWidget'
 import CreatePostWidget from '../widgets/CreatePostWidget'
-import PostsWidget from '../widgets/PostsWidget'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from '../../store/store'
 import Weather from '../widgets/Weather'
 import FriendList from '../widgets/FriendList'
+import PostsWidget from '../widgets/PostsWidget'
 
 const Home = () => {
   const dispatch = useDispatch()
-  const [user, setUser] = useState(useSelector((state) => state.user))
-  const posts = useSelector((state) => state.posts)
+  const user = useSelector((state) => state.user)
 
   const token = useSelector((state) => state.token)
   const getPost = async () => {
@@ -29,36 +29,24 @@ const Home = () => {
 
   useEffect(() => {
     getPost()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Navbar />
-      </Grid>
-      <Grid container xs={12} spacing={2} mt="1rem" p="0 2rem">
+      </Grid> */}
+      <Grid container spacing={2} mt="1rem" p="0 2rem">
         <Grid item xs={3}>
-          <UserWidget xs={3} />
+          <UserWidget userId={user.id} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={6} sx={{ height: '90vh', overflow: 'auto' }}>
           <CreatePostWidget />
-          {posts.map((post) => (
-            <PostsWidget
-              description={post.description}
-              likes={post.likes}
-              imgUrl={post.image}
-              comments={post.comments}
-              postUserId={post.userId}
-              firstName={post.firstName}
-              lastName={post.lastName}
-              key={post.id}
-              postId={post.id}
-            />
-          ))}
+          <PostsWidget userId={user.id} />
         </Grid>
         <Grid item xs={3}>
           <Weather />
-          <FriendList />
+          <FriendList userId={user.id} />
         </Grid>
       </Grid>
     </Grid>
