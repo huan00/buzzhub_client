@@ -18,13 +18,28 @@ export const authSlice = createSlice({
       state.user = action.payload.user
       state.token = action.payload.token
     },
+    setUser: (state, action) => {
+      state.user = action.payload
+    },
     setLogout: (state) => {
       state.user = null
       state.token = null
+    },
+    setPosts: (state, action) => {
+      state.posts = [...action.payload]
+    },
+    setPost: (state, action) => {
+      const updated = state.posts.map((post) => {
+        if (post.id === action.payload.id) return action.payload
+        return post
+      })
+
+      state.posts = updated
     }
   }
 })
 
-export const { setMode, setLogin, setLogout } = authSlice.actions
+export const { setMode, setLogin, setUser, setLogout, setPosts, setPost } =
+  authSlice.actions
 
 export default authSlice.reducer

@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Typography,
-  input,
   useMediaQuery,
   useTheme,
   TextField
@@ -49,11 +48,9 @@ const registerForm = {
 const Form = () => {
   const [isLogin, setIsLogin] = useState(true)
   const { palette } = useTheme()
-  const theme = useTheme()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const background = theme.palette.neutral.light
+  const isMobile = useMediaQuery('(min-width:600px)')
 
   const handleRegister = async (values, actions) => {
     const formData = new FormData()
@@ -61,6 +58,7 @@ const Form = () => {
       formData.append(value, values[value])
     }
     formData.append('picturePath', values.picturePath.name)
+
     const saveUserReponse = await fetch(
       'http://localhost:8000/buzzhub/user/register',
       { method: 'POST', body: formData }
@@ -113,7 +111,12 @@ const Form = () => {
         isSubmitting
       }) => (
         <form onSubmit={handleSubmit}>
-          <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap="30px">
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(4, minmax(0,1fr))"
+            gap="30px"
+            sx={{ '& > div': { gridColumn: isMobile ? undefined : 'span 4' } }}
+          >
             {!isLogin && (
               <>
                 <TextField
@@ -192,6 +195,7 @@ const Form = () => {
               name="email"
               onBlur={handleBlur}
               onChange={handleChange}
+              value={values.email}
               error={touched.email && errors.email}
               helperText={touched.email && errors.email}
               sx={{ gridColumn: 'span 4' }}
@@ -200,6 +204,7 @@ const Form = () => {
               label="Password"
               type="password"
               name="password"
+              value={values.password}
               onBlur={handleBlur}
               onChange={handleChange}
               error={touched.password && errors.password}

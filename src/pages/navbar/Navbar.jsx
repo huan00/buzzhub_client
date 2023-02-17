@@ -32,7 +32,6 @@ const Navbar = () => {
 
   const primaryLight = theme.palette.primary.light
   const alt = theme.palette.background.alt
-  const neutralLight = theme.palette.neutral.light
 
   const handleMode = () => {
     dispatch(setMode())
