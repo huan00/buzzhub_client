@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material'
 import Banner from '../../components/Banner'
 import { useSelector } from 'react-redux'
 import { useTheme } from '@emotion/react'
+import { baseUrl } from '../../services/services'
 
 const FriendList = ({ userId }) => {
   const [friends, setFriends] = useState([])
@@ -10,10 +11,10 @@ const FriendList = ({ userId }) => {
   const theme = useTheme()
 
   const getFriendListDetail = async () => {
-    const res = await fetch(
-      `http://localhost:8000/buzzhub/user/${userId}/friends`,
-      { method: 'GET', headers: { Authorization: `Token ${token}` } }
-    )
+    const res = await fetch(`${baseUrl}/buzzhub/user/${userId}/friends`, {
+      method: 'GET',
+      headers: { Authorization: `Token ${token}` }
+    })
 
     const data = await res.json()
     setFriends(data)
@@ -29,7 +30,7 @@ const FriendList = ({ userId }) => {
         Your Current Friends
       </Typography>
       <Box p="1rem">
-        {friends.map((friend) => (
+        {friends?.map((friend) => (
           <Banner
             key={Math.random()}
             postUserId={friend.id}

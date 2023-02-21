@@ -11,6 +11,7 @@ import { Favorite, FavoriteBorder, Comment, Share } from '@mui/icons-material'
 import Banner from '../../components/Banner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPost } from '../../store/store'
+import { baseUrl } from '../../services/services'
 
 const PostWidget = ({
   description,
@@ -31,13 +32,10 @@ const PostWidget = ({
   const user = useSelector((state) => state.user)
 
   const handleLikes = async () => {
-    const res = await fetch(
-      `http://localhost:8000/buzzhub/posts/likes/${postId}`,
-      {
-        method: 'PATCH',
-        headers: { Authorization: `Token ${token}` }
-      }
-    )
+    const res = await fetch(`${baseUrl}/buzzhub/posts/likes/${postId}`, {
+      method: 'PATCH',
+      headers: { Authorization: `Token ${token}` }
+    })
     const data = await res.json()
     dispatch(setPost(data))
   }
@@ -46,14 +44,11 @@ const PostWidget = ({
     if (comment) {
       const formData = new FormData()
       formData.append('comment', comment)
-      const res = await fetch(
-        `http://localhost:8000/buzzhub/posts/comment/${postId}`,
-        {
-          method: 'PATCH',
-          headers: { Authorization: `Token ${token}` },
-          body: formData
-        }
-      )
+      const res = await fetch(`${baseUrl}/buzzhub/posts/comment/${postId}`, {
+        method: 'PATCH',
+        headers: { Authorization: `Token ${token}` },
+        body: formData
+      })
       const data = await res.json()
       dispatch(setPost(data))
       setComment('')
@@ -83,7 +78,7 @@ const PostWidget = ({
           m="1rem 0"
         >
           <img
-            src={`http://localhost:8000${imgUrl}`}
+            src={`${baseUrl}${imgUrl}`}
             alt="post"
             width="100%"
             height="100%"

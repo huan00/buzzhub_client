@@ -6,6 +6,7 @@ import PostsWidget from '../widgets/PostsWidget'
 import FriendList from '../widgets/FriendList'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { baseUrl } from '../../services/services'
 
 const Profile = () => {
   const [user, setUser] = useState(null)
@@ -13,7 +14,7 @@ const Profile = () => {
   const { id } = useParams()
 
   const getProfileUser = async () => {
-    const res = await fetch(`http://localhost:8000/buzzhub/user/${id}`, {
+    const res = await fetch(`${baseUrl}/buzzhub/user/${id}`, {
       method: 'GET',
       headers: { Authorization: `Token ${token}` }
     })

@@ -9,6 +9,7 @@ import { setPosts } from '../../store/store'
 import Weather from '../widgets/Weather'
 import FriendList from '../widgets/FriendList'
 import PostsWidget from '../widgets/PostsWidget'
+import { baseUrl } from '../../services/services'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const Home = () => {
 
   const token = useSelector((state) => state.token)
   const getPost = async () => {
-    const res = await fetch(`http://localhost:8000/buzzhub/posts`, {
+    const res = await fetch(`${baseUrl}/buzzhub/posts`, {
       method: 'GET',
       headers: { Authorization: `Token ${token}` }
     })

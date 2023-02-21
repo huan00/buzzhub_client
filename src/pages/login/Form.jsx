@@ -14,6 +14,7 @@ import { Edit } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setLogin } from '../../store/store'
+import { baseUrl } from '../../services/services'
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required('required'),
@@ -59,10 +60,10 @@ const Form = () => {
     }
     formData.append('picturePath', values.picturePath.name)
 
-    const saveUserReponse = await fetch(
-      'http://localhost:8000/buzzhub/user/register',
-      { method: 'POST', body: formData }
-    )
+    const saveUserReponse = await fetch(`${baseUrl}/buzzhub/user/register`, {
+      method: 'POST',
+      body: formData
+    })
     if (saveUserReponse.status === 201) {
       actions.resetForm()
       setIsLogin((isLogin) => !isLogin)
@@ -74,7 +75,7 @@ const Form = () => {
     formData.append('email', values.email)
     formData.append('password', values.password)
 
-    const res = await fetch('http://localhost:8000/buzzhub/user/login', {
+    const res = await fetch(`${baseUrl}/buzzhub/user/login`, {
       method: 'POST',
       body: formData
     })

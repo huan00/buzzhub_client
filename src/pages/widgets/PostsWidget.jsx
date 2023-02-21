@@ -3,6 +3,7 @@ import { Box } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from '../../store/store'
 import PostWidget from './PostWidget'
+import { baseUrl } from '../../services/services'
 
 const PostsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch()
@@ -10,7 +11,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   const posts = useSelector((state) => state.posts)
 
   const getUserPost = async () => {
-    const res = await fetch(`http://localhost:8000/buzzhub/posts/${userId}`, {
+    const res = await fetch(`${baseUrl}/buzzhub/posts/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Token ${token}` }
     })
@@ -20,7 +21,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   }
 
   const getPosts = async () => {
-    const res = await fetch(`http://localhost:8000/buzzhub/posts`, {
+    const res = await fetch(`${baseUrl}/buzzhub/posts`, {
       method: 'GET'
     })
 

@@ -18,6 +18,7 @@ import Dropzone from 'react-dropzone'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from '../../store/store'
+import { baseUrl } from '../../services/services'
 
 const CreatePostWidget = () => {
   const [imageToggle, setImageToggle] = useState(false)
@@ -35,7 +36,7 @@ const CreatePostWidget = () => {
     formData.append('description', post)
     formData.append('image', postImage)
 
-    const res = await fetch('http://localhost:8000/buzzhub/posts/create', {
+    const res = await fetch(`${baseUrl}/buzzhub/posts/create`, {
       method: 'POST',
       headers: {
         Authorization: `Token ${token}`
@@ -79,7 +80,7 @@ const CreatePostWidget = () => {
           overflow="hidden"
         >
           <img
-            src={`http://localhost:8000${user.picturePath}`}
+            src={`${baseUrl}${user.picturePath}`}
             alt="profile"
             width="100%"
             height="100%"

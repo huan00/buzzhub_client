@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../services/services'
 
 const UserWidget = ({ userId }) => {
   const [user, setUser] = useState(null)
@@ -19,7 +20,7 @@ const UserWidget = ({ userId }) => {
   const navigate = useNavigate()
 
   const getUser = async () => {
-    const res = await fetch(`http://localhost:8000/buzzhub/user/${userId}`, {
+    const res = await fetch(`${baseUrl}/buzzhub/user/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Token ${token}` }
     })
@@ -62,7 +63,7 @@ const UserWidget = ({ userId }) => {
               overflow="hidden"
             >
               <img
-                src={`http://localhost:8000${user.picturePath}`}
+                src={`${baseUrl}${user.picturePath}`}
                 alt="profile"
                 width="100%"
                 height="100%"

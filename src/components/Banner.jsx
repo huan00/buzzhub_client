@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AccountCircle, PersonAdd, PersonRemove } from '@mui/icons-material'
 import { setUser } from '../store/store'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { baseUrl } from '../services/services'
 
 const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {
   const user = useSelector((state) => state.user)
@@ -12,10 +13,10 @@ const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {
   const theme = useTheme()
 
   const handleAddRemoveFriend = async () => {
-    const res = await fetch(
-      `http://localhost:8000/buzzhub/user/${user.id}/${postUserId}`,
-      { method: 'PATCH', headers: { Authorization: `Token ${token}` } }
-    )
+    const res = await fetch(`${baseUrl}/${user.id}/${postUserId}`, {
+      method: 'PATCH',
+      headers: { Authorization: `Token ${token}` }
+    })
     const data = await res.json()
 
     dispatch(setUser(data))
@@ -42,7 +43,7 @@ const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {
         >
           {userPicturePath ? (
             <img
-              src={`http://localhost:8000${userPicturePath}`}
+              src={`${baseUrl}${userPicturePath}`}
               alt="profile"
               width="75x"
               height="75px"
