@@ -76,36 +76,38 @@ const Navbar = () => {
             <Comment sx={{ marginLeft: '1rem' }} />
             <Notifications sx={{ marginLeft: '1rem' }} />
           </Box>
-          <Box marginLeft="1rem">
-            <FormControl variant="standard" value={fullName}>
-              <Select
-                value={fullName}
-                sx={{
-                  width: '150px',
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                  textAlign: 'center'
-                }}
-                input={<InputBase />}
-              >
-                <MenuItem value={fullName} sx={{ textAlign: 'center' }}>
-                  <Typography sx={{ textAlign: 'center' }}>
-                    {fullName}
-                  </Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography
-                    sx={{
-                      display: 'flex'
-                    }}
-                    onClick={handleLogout}
-                  >
-                    <Logout sx={{ mr: '.5rem' }} /> Logout
-                  </Typography>
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          {user && (
+            <Box marginLeft="1rem">
+              <FormControl variant="standard" value={fullName}>
+                <Select
+                  value={fullName}
+                  sx={{
+                    width: '150px',
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    textAlign: 'center'
+                  }}
+                  input={<InputBase />}
+                >
+                  <MenuItem value={fullName} sx={{ textAlign: 'center' }}>
+                    <Typography sx={{ textAlign: 'center' }}>
+                      {fullName}
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem>
+                    <Typography
+                      sx={{
+                        display: 'flex'
+                      }}
+                      onClick={handleLogout}
+                    >
+                      <Logout sx={{ mr: '.5rem' }} /> Logout
+                    </Typography>
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          )}
         </Box>
       ) : (
         <Box>
