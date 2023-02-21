@@ -29,7 +29,7 @@ const Weather = () => {
 
   const getWeather = async () => {
     const res = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location.lat},${location.lon}`
+      `https://api.weatherapi.com/v1/current.json?key=${key}&q=${location.lat},${location.lon}`
     )
 
     const data = await res.json()
