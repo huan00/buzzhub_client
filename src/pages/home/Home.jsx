@@ -14,7 +14,6 @@ import { baseUrl } from '../../services/services'
 const Home = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user)
-  console.log(user)
 
   const token = useSelector((state) => state.token)
   const getPost = async () => {
