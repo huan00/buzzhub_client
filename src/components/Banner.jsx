@@ -13,10 +13,13 @@ const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {
   const theme = useTheme()
 
   const handleAddRemoveFriend = async () => {
-    const res = await fetch(`${baseUrl}/${user.id}/${postUserId}`, {
-      method: 'PATCH',
-      headers: { Authorization: `Token ${token}` }
-    })
+    const res = await fetch(
+      `${baseUrl}/buzzhub/user/${user.id}/${postUserId}`,
+      {
+        method: 'PATCH',
+        headers: { Authorization: `Token ${token}` }
+      }
+    )
     const data = await res.json()
 
     dispatch(setUser(data))
@@ -27,10 +30,13 @@ const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      onClick={() => navigate(`/profile/${postUserId}`)}
       sx={{ '&:hover': { cursor: 'pointer' } }}
     >
-      <Box display="flex" alignItems="center">
+      <Box
+        display="flex"
+        alignItems="center"
+        onClick={() => navigate(`/profile/${postUserId}`)}
+      >
         <Box
           display="flex"
           width="75px"
