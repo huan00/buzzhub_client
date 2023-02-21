@@ -20,7 +20,10 @@ const App = () => {
           <CssBaseline />
           <Navbar />
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route
+              path="/"
+              element={isAuth ? <Navigate to="/home" /> : <Login />}
+            />
             <Route
               path="/home"
               element={isAuth ? <Home /> : <Navigate to="/" />}
