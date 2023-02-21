@@ -44,8 +44,6 @@ const Weather = () => {
     getWeather()
   }, [location])
 
-  console.log(weather.current)
-
   return (
     <Box
       backgroundColor={theme.palette.neutral.light}

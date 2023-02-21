@@ -137,8 +137,9 @@ const PostWidget = ({
             setComment(e.target.value)
           }}
           value={comment}
+          placeholder="Make a comment."
           sx={{
-            border: `1px solid ${theme.palette.neutral.main}`,
+            border: `1px solid ${theme.palette.primary.main}`,
             width: '80%',
             pl: '1rem'
           }}

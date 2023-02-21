@@ -2,11 +2,13 @@ import { Box, Typography, useTheme } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { AccountCircle, PersonAdd, PersonRemove } from '@mui/icons-material'
 import { setUser } from '../store/store'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {
   const user = useSelector((state) => state.user)
   const token = useSelector((state) => state.token)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const theme = useTheme()
 
   const handleAddRemoveFriend = async () => {
@@ -20,7 +22,13 @@ const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {
   }
 
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      onClick={() => navigate(`/profile/${postUserId}`)}
+      sx={{ '&:hover': { cursor: 'pointer' } }}
+    >
       <Box display="flex" alignItems="center">
         <Box
           display="flex"

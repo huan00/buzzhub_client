@@ -60,6 +60,7 @@ const CreatePostWidget = () => {
       alignItems="center"
       position="sticky"
       top="0"
+      zIndex="2"
     >
       <Box
         display="flex"
@@ -134,20 +135,30 @@ const CreatePostWidget = () => {
           onClick={() => setImageToggle((imageToggle) => !imageToggle)}
           sx={{ '&:hover': { cursor: 'pointer' } }}
         >
-          <AddPhotoAlternateOutlined />
-          <Typography>Image</Typography>
+          <AddPhotoAlternateOutlined
+            sx={{ color: theme.palette.primary.main }}
+          />
+          <Typography sx={{ color: theme.palette.primary.main }}>
+            Image
+          </Typography>
         </Box>
         <Box display="flex">
-          <Gif />
-          <Typography>Gif</Typography>
+          <Gif sx={{ color: theme.palette.neutral.mediumMain }} />
+          <Typography sx={{ color: theme.palette.neutral.mediumMain }}>
+            Gif
+          </Typography>
         </Box>
         <Box display="flex">
-          <AttachFile />
-          <Typography>Attachment</Typography>
+          <AttachFile sx={{ color: theme.palette.neutral.mediumMain }} />
+          <Typography sx={{ color: theme.palette.neutral.mediumMain }}>
+            Attachment
+          </Typography>
         </Box>
         <Box display="flex">
-          <Mic />
-          <Typography>Voice</Typography>
+          <Mic sx={{ color: theme.palette.neutral.mediumMain }} />
+          <Typography sx={{ color: theme.palette.neutral.mediumMain }}>
+            Voice
+          </Typography>
         </Box>
         <Button
           variant="contained"

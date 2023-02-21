@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid } from '@mui/material'
+import { Grid, useTheme } from '@mui/material'
 
 import UserWidget from '../widgets/UserWidget'
 import CreatePostWidget from '../widgets/CreatePostWidget'
@@ -13,6 +13,7 @@ import PostsWidget from '../widgets/PostsWidget'
 const Home = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.user)
+  console.log(user)
 
   const token = useSelector((state) => state.token)
   const getPost = async () => {
@@ -32,22 +33,17 @@ const Home = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Grid container spacing={2}>
-      {/* <Grid item xs={12}>
-        <Navbar />
-      </Grid> */}
-      <Grid container spacing={2} mt="1rem" p="0 2rem">
-        <Grid item xs={3}>
-          <UserWidget userId={user.id} />
-        </Grid>
-        <Grid item xs={6} sx={{ height: '90vh', overflow: 'auto' }}>
-          <CreatePostWidget />
-          <PostsWidget userId={user.id} />
-        </Grid>
-        <Grid item xs={3}>
-          <Weather />
-          <FriendList userId={user.id} />
-        </Grid>
+    <Grid container columnSpacing={2} mt="1rem" sx={{ paddingTop: '0' }}>
+      <Grid item xs={3}>
+        <UserWidget userId={user.id} />
+      </Grid>
+      <Grid item xs={6} sx={{ height: '90vh', overflow: 'auto' }}>
+        <CreatePostWidget />
+        <PostsWidget userId={user.id} />
+      </Grid>
+      <Grid item xs={3}>
+        <Weather />
+        <FriendList userId={user.id} />
       </Grid>
     </Grid>
   )

@@ -31,7 +31,7 @@ const Navbar = () => {
   const theme = useTheme()
 
   const primaryLight = theme.palette.primary.light
-  const alt = theme.palette.background.alt
+  const background = theme.palette.neutral.light
 
   const handleMode = () => {
     dispatch(setMode())
@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <Box
       sx={{ width: '100%', height: 100 }}
-      backgroundColor={alt}
+      backgroundColor={background}
       p=".25rem 1rem"
       display="flex"
       alignItems="center"
