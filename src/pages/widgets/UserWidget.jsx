@@ -26,8 +26,7 @@ const UserWidget = ({ userId }) => {
     })
 
     const data = await res.json()
-
-    dispatch(setUser(data))
+    setUser(data)
   }
 
   useEffect(() => {
