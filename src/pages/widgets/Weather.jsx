@@ -42,7 +42,7 @@ const Weather = () => {
 
   useEffect(() => {
     getWeather()
-  }, [location])
+  }, [location]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box

@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { AccountCircle, PersonAdd, PersonRemove } from '@mui/icons-material'
 import { setUser } from '../store/store'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { baseUrl } from '../services/services'
 
 const Banner = ({ postUserId, firstName, lastName, userPicturePath }) => {

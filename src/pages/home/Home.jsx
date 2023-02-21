@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, useTheme } from '@mui/material'
+import { Grid } from '@mui/material'
 
 import UserWidget from '../widgets/UserWidget'
 import CreatePostWidget from '../widgets/CreatePostWidget'
