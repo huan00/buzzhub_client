@@ -50,7 +50,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
           likes,
           location,
           userId,
-          userPicturePath
+          userPicturePath,
+          video
         }) => (
           <PostWidget
             comments={comments}
@@ -64,6 +65,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             postUserId={userId}
             key={id + Math.random()}
             userPicturePath={userPicturePath}
+            videoUrl={video}
           />
         )
       )}

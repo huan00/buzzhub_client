@@ -7,13 +7,7 @@ import {
   Typography,
   useTheme
 } from '@mui/material'
-import {
-  AddPhotoAlternateOutlined,
-  Gif,
-  AttachFile,
-  Mic,
-  Edit
-} from '@mui/icons-material'
+import { AddPhotoAlternateOutlined, Edit, YouTube } from '@mui/icons-material'
 import Dropzone from 'react-dropzone'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,6 +18,7 @@ const CreatePostWidget = () => {
   const [imageToggle, setImageToggle] = useState(false)
   const [post, setPost] = useState('')
   const [postImage, setPostImage] = useState('')
+  const [postVideo, setPostVideo] = useState('')
   const theme = useTheme()
   const user = useSelector((state) => state.user)
   const token = useSelector((state) => state.token)
@@ -35,6 +30,7 @@ const CreatePostWidget = () => {
     formData.append('userId', user.id)
     formData.append('description', post)
     formData.append('image', postImage)
+    formData.append('video', postVideo)
 
     const res = await fetch(`${baseUrl}/buzzhub/posts/create`, {
       method: 'POST',
@@ -45,12 +41,20 @@ const CreatePostWidget = () => {
     })
 
     const data = await res.json()
-
     dispatch(setPosts(data))
     setPost('')
     setPostImage(null)
   }
+  console.log(postVideo.name)
 
+  const handleVideo = (video) => {
+    setPostVideo(video)
+    setPostImage('')
+  }
+  const handleImage = (image) => {
+    setPostImage(image)
+    setPostVideo('')
+  }
   return (
     <Box
       width="100%"
@@ -94,12 +98,16 @@ const CreatePostWidget = () => {
           sx={{ width: '80%', ml: '1rem' }}
         />
       </Box>
-      {imageToggle && (
+      {(imageToggle || post) && (
         <Box>
           <Dropzone
-            acceptedFile=".jpg,.jepg,.png"
+            acceptedFile=".jpg,.jepg,.png,.gif,.mp4"
             multiple={false}
-            onDrop={(acceptedFiles) => setPostImage(acceptedFiles[0])}
+            onDrop={(acceptedFiles) =>
+              acceptedFiles[0].name.split('.')[1] === 'mp4'
+                ? handleVideo(acceptedFiles[0])
+                : handleImage(acceptedFiles[0])
+            }
           >
             {({ getRootProps, getInputProps }) => (
               <Box
@@ -110,15 +118,15 @@ const CreatePostWidget = () => {
               >
                 <Box {...getRootProps()}>
                   <input {...getInputProps()} />
-                  {!postImage ? (
-                    <p>Drop your image here</p>
+                  {!postImage && !postVideo ? (
+                    <p>Drop your image/Video here</p>
                   ) : (
                     <Box
                       display="flex"
                       alignItems="center"
                       justifyContent="space-between"
                     >
-                      <p>{postImage.name}</p>
+                      <p>{postImage ? postImage.name : postVideo.name}</p>
                       <Edit />
                     </Box>
                   )}
@@ -140,25 +148,21 @@ const CreatePostWidget = () => {
             sx={{ color: theme.palette.primary.main }}
           />
           <Typography sx={{ color: theme.palette.primary.main }}>
-            Image
+            Image/Gif
           </Typography>
         </Box>
+
         <Box display="flex">
-          <Gif sx={{ color: theme.palette.neutral.mediumMain }} />
+          {/* <Dropzone
+            acceptedFile=".mp4"
+            multiple={false}
+            onDrop={(acceptedFile) => setPostVideo(acceptedFile[0])}
+          >
+
+          </Dropzone> */}
+          <YouTube sx={{ color: theme.palette.neutral.mediumMain }} />
           <Typography sx={{ color: theme.palette.neutral.mediumMain }}>
-            Gif
-          </Typography>
-        </Box>
-        <Box display="flex">
-          <AttachFile sx={{ color: theme.palette.neutral.mediumMain }} />
-          <Typography sx={{ color: theme.palette.neutral.mediumMain }}>
-            Attachment
-          </Typography>
-        </Box>
-        <Box display="flex">
-          <Mic sx={{ color: theme.palette.neutral.mediumMain }} />
-          <Typography sx={{ color: theme.palette.neutral.mediumMain }}>
-            Voice
+            Video
           </Typography>
         </Box>
         <Button

@@ -12,6 +12,7 @@ import Banner from '../../components/Banner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPost } from '../../store/store'
 import { baseUrl } from '../../services/services'
+import { height } from '@mui/system'
 
 const PostWidget = ({
   description,
@@ -22,7 +23,8 @@ const PostWidget = ({
   postUserId,
   lastName,
   firstName,
-  userPicturePath
+  userPicturePath,
+  videoUrl
 }) => {
   const theme = useTheme()
   const [isComment, setIsComment] = useState(false)
@@ -55,6 +57,9 @@ const PostWidget = ({
     }
   }
 
+  console.log(imgUrl)
+  console.log(baseUrl + videoUrl)
+
   return (
     <Box
       backgroundColor={theme.palette.neutral.light}
@@ -77,12 +82,25 @@ const PostWidget = ({
           overflow="hidden"
           m="1rem 0"
         >
-          <img
-            src={`${baseUrl}${imgUrl}`}
-            alt="post"
-            width="100%"
-            height="100%"
-          />
+          {imgUrl !== '/media/null' ? (
+            <img
+              src={`${baseUrl}${imgUrl}`}
+              alt="post"
+              width="100%"
+              height="100%"
+            />
+          ) : (
+            <video
+              width="100%"
+              height="100%"
+              controls
+              autoPlay={true}
+              muted
+              loop={true}
+            >
+              <source src={`${baseUrl}${videoUrl}`} type="video/mp4" />
+            </video>
+          )}
         </Box>
         <Box display="flex" justifyContent="space-between">
           <Box display="flex">
