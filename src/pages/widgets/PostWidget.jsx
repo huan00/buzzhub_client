@@ -56,9 +56,6 @@ const PostWidget = ({
     }
   }
 
-  console.log(imgUrl)
-  console.log(baseUrl + videoUrl)
-
   return (
     <Box
       backgroundColor={theme.palette.neutral.light}
@@ -81,7 +78,7 @@ const PostWidget = ({
           overflow="hidden"
           m="1rem 0"
         >
-          {imgUrl !== '/media/null' ? (
+          {imgUrl ? (
             <img
               src={`${baseUrl}${imgUrl}`}
               alt="post"

@@ -45,7 +45,6 @@ const CreatePostWidget = () => {
     setPost('')
     setPostImage(null)
   }
-  console.log(postVideo.name)
 
   const handleVideo = (video) => {
     setPostVideo(video)
@@ -55,6 +54,7 @@ const CreatePostWidget = () => {
     setPostImage(image)
     setPostVideo('')
   }
+
   return (
     <Box
       width="100%"
@@ -152,14 +152,11 @@ const CreatePostWidget = () => {
           </Typography>
         </Box>
 
-        <Box display="flex">
-          {/* <Dropzone
-            acceptedFile=".mp4"
-            multiple={false}
-            onDrop={(acceptedFile) => setPostVideo(acceptedFile[0])}
-          >
-
-          </Dropzone> */}
+        <Box
+          display="flex"
+          sx={{ '&:hover': { cursor: 'pointer' } }}
+          onClick={() => setImageToggle((imageToggle) => !imageToggle)}
+        >
           <YouTube sx={{ color: theme.palette.neutral.mediumMain }} />
           <Typography sx={{ color: theme.palette.neutral.mediumMain }}>
             Video
