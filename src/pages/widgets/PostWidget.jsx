@@ -12,7 +12,6 @@ import Banner from '../../components/Banner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPost } from '../../store/store'
 import { baseUrl } from '../../services/services'
-import { height } from '@mui/system'
 
 const PostWidget = ({
   description,
