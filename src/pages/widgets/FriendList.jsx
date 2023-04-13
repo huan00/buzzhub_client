@@ -17,6 +17,7 @@ const FriendList = ({ userId }) => {
     })
 
     const data = await res.json()
+    console.log(data)
     setFriends(data)
   }
 

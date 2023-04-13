@@ -32,6 +32,8 @@ const Home = () => {
     getPost()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  console.log(user)
+
   return (
     <Grid container columnSpacing={2} mt="1rem" sx={{ paddingTop: '0' }}>
       <Grid item xs={3}>

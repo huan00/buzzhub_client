@@ -1,6 +1,30 @@
-# Buzzhub
+## Buzzhub
 
-## Full stack social media app
+### Date: 02/23/2023
+
+#### By: Huan Zeng
+
+---
+
+### [Links to deploy site with Netlify]('https://buzzhub.netlify.app/home')
+
+---
+
+### Desciption
+
+A website where users can create an account to post pictures and videos to share with others. Other users can like and comments on other's post.
+
+#### login page
+
+![login](./src/assets/login.png)
+
+#### main page
+
+![main](./src/assets/main.png)
+
+#### profile page
+
+![profile](./src/assets/profile.png)
 
 ### Features:
 
