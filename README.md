@@ -8,6 +8,12 @@
 
 ### [Links to deploy site with Netlify]('https://buzzhub.netlify.app/home')
 
+#### Take a tour with this account:
+
+##### Email: demo@demo.com
+
+##### Password: demo
+
 ---
 
 ### Desciption
